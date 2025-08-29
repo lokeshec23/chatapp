@@ -1,9 +1,12 @@
 // client/src/App.jsx
+import { Outlet } from "react-router-dom";
+
 function App() {
   return (
-    <div className="bg-gray-900 text-white min-h-screen flex items-center justify-center">
-      <h1 className="text-4xl font-bold">Chat App Frontend</h1>
-    </div>
+    <>
+      {/* Outlet is a placeholder where the matched route component will be rendered */}
+      <Outlet />
+    </>
   );
 }
 
