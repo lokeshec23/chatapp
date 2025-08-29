@@ -7,11 +7,11 @@ import ScrollableChat from "./ScrollableChat";
 const ENDPOINT = "http://localhost:8000";
 let socket;
 
-const ChatContainer = ({ selectedUser }) => {
+const ChatContainer = ({ selectedUser, selectedChat: initialSelectedChat }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [selectedChat, setSelectedChat] = useState(null);
+  const [selectedChat, setSelectedChat] = useState(initialSelectedChat);
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
   // Effect for setting up socket

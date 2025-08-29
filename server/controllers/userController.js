@@ -46,14 +46,21 @@ const authUser = async (req, res) => {
 // @desc   Get all users except the logged in user
 // @route  GET /api/users
 // @access Private
-const getAllUsers = async (req, res) => {
-  try {
-    // req.user is populated by the protect middleware
-    const users = await User.find({ _id: { $ne: req.user._id } });
-    res.status(200).json(users);
-  } catch (error) {
-    res.status(500).json({ message: `Server Error: ${error.message}` });
-  }
-};
+// server/controllers/userController.js
+// ... (keep authUser)
 
+const getAllUsers = async (req, res) => {
+  const keyword = req.query.search
+    ? {
+        $or: [
+          { name: { $regex: req.query.search, $options: "i" } },
+          { phoneNumber: { $regex: req.query.search, $options: "i" } },
+        ],
+      }
+    : {};
+
+  const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
+  res.send(users);
+};
+// ... (export both functions)
 export { authUser, getAllUsers };
