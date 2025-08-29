@@ -1,9 +1,15 @@
 // client/src/pages/ChatPage.jsx
+import React, { useState } from "react";
+import Sidebar from "../components/Sidebar";
+import ChatContainer from "../components/ChatContainer";
 
 const ChatPage = () => {
+  const [selectedUser, setSelectedUser] = useState(null);
+
   return (
-    <div className="bg-gray-900 text-white min-h-screen flex items-center justify-center">
-      <h1 className="text-4xl font-bold">Welcome to the Chat Page!</h1>
+    <div className="flex h-screen bg-gray-900 text-white">
+      <Sidebar onSelectUser={setSelectedUser} />
+      <ChatContainer selectedUser={selectedUser} />
     </div>
   );
 };

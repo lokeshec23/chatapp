@@ -43,4 +43,17 @@ const authUser = async (req, res) => {
   }
 };
 
-export { authUser };
+// @desc   Get all users except the logged in user
+// @route  GET /api/users
+// @access Private
+const getAllUsers = async (req, res) => {
+  try {
+    // req.user is populated by the protect middleware
+    const users = await User.find({ _id: { $ne: req.user._id } });
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: `Server Error: ${error.message}` });
+  }
+};
+
+export { authUser, getAllUsers };
